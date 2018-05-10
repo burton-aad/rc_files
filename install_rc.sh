@@ -16,7 +16,7 @@ sudo apt install -y $PKGS
 
 ## Install rc files from this directory to the current user
 
-RC_FILES="bashrc bash_aliases"
+RC_FILES="bashrc bash_aliases gitconfig"
 
 for f in $RC_FILES; do
     [ -e ~/.$f -o -L ~/.$f ] && rm -f ~/.$f

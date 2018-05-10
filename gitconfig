@@ -1,0 +1,14 @@
+[user]
+	email = TO_SET
+	name = TO_SET
+[color]
+	ui = true
+[log]
+	decorate = short
+[push]
+	default = upstream
+[interactive]
+	singlekey = true
+[alias]
+	lg = log --graph --oneline
+
