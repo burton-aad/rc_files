@@ -19,11 +19,19 @@ sudo apt install -y $PKGS
 RC_FILES="bashrc bash_aliases"
 
 for f in $RC_FILES; do
-    [ -f ~/.$f ] && rm -f ~/.$f
-    ln -s $f ~/.$f
+    [ -e ~/.$f -o -L ~/.$f ] && rm -f ~/.$f
+    ln -s $(dirname $(readlink -f $0))/$f ~/.$f
 done;
 
 ## Emacs config
-pushd ~/
-git clone --recurse-submodules https://github.com/burton-aad/.emacs.d.git
-popd
+if test -e ~/.emacs.d && test ! -d ~/.emacs.d; then
+    rm -f ~/.emacs.d
+fi
+
+if [ -d ~/.emacs.d ]; then
+    echo "~/.emacs.d already exists, keep it."
+else
+    pushd ~/
+    git clone --recurse-submodules https://github.com/burton-aad/.emacs.d.git
+    popd
+fi
