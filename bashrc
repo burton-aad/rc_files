@@ -110,8 +110,9 @@ function fancy_prompt {
   return_code=$(printf "%3d" $return_code)
   if [ $return_code == 0 ]; then ret_color=$COLOR_LIGHT_BLUE; else ret_color=$COLOR_LIGHT_RED; fi
   gps1=$(__git_ps1 2> /dev/null)
+  if [ $HOSTNAME == "antix1" ]; then newline="\n"; else newline=""; fi
   # Set your own prompt with color
-  PS1="${debian_chroot:+($debian_chroot)}$COLOR_LIGHT_RED\u$COLOR_NEUTRAL@$COLOR_YELLOW\h:$ret_color$return_code$COLOR_LIGHT_GREEN:\w$COLOR_NEUTRAL$gps1$COLOR_LIGHT_GREEN\$$COLOR_NEUTRAL "
+  PS1="${debian_chroot:+($debian_chroot)}$COLOR_LIGHT_RED\u$COLOR_NEUTRAL@$COLOR_YELLOW\h:$ret_color$return_code$COLOR_LIGHT_GREEN:\w$COLOR_NEUTRAL$gps1$newline$COLOR_LIGHT_GREEN\$$COLOR_NEUTRAL "
 }
 
 if [ "$color_prompt" = yes ]; then
