@@ -2,7 +2,7 @@
 
 ## Install packages
 
-PKGS="git curl vim"
+PKGS="git curl vim tofrodos"
 
 if dpkg -l | grep -q xserver; then
     # grapical display
