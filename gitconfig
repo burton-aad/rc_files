@@ -9,6 +9,12 @@
 	default = upstream
 [interactive]
 	singlekey = true
+[pretty]
+	line = format:%C(auto)%h %Cgreen%<(17)%aN%C(auto)%d %Creset%s
+	linedate = format:%C(auto)%h %Cblue%>(30)%ad %Cgreen%<(17)%aN%C(auto)%d %Creset%s
 [alias]
-	lg = log --graph --oneline
-
+	lg = log --graph --pretty=line
+	lgdate = log --graph --pretty=linedate
+	st = status
+	co = checkout
+	ci = commit
