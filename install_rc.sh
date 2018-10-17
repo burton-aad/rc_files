@@ -16,10 +16,11 @@ sudo apt install -y $PKGS
 
 ## Install rc files from this directory to the current user
 
-RC_FILES="bashrc bash_aliases gitconfig"
+RC_FILES="bashrc bash_aliases gitconfig Xresources"
 
 for f in $RC_FILES; do
-    [ -e ~/.$f -o -L ~/.$f ] && rm -f ~/.$f
+    [ -f ~/.$f ] && mv -f ~/.$f ~/.$f.orig
+    [ -L ~/.$f ] && rm -f ~/.$f
     ln -s $(dirname $(readlink -f $0))/$f ~/.$f
 done;
 

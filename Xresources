@@ -1,0 +1,62 @@
+XTerm*locale: true
+XTerm.vt100.reverseVideo: true
+XTerm.vt100.saveLines: 16384
+XTerm.vt100.faceName: Monospace
+XTerm.vt100.faceSize: 11
+XTerm.vt100.scrollBar: false
+
+! XTerm*on3Clicks: regex (([A-Za-z0-9/_-]|\@|\~|\\.))+
+! XTerm*on3Clicks: regex [A-Za-z0-9/_-]+
+XTerm*on3Clicks: regex [^ \n\t]+
+XTerm*on4Clicks: line
+
+! XTerm*multiScroll: true
+XTerm*scrollTtyOutput: false
+XTerm*scrollKey: true
+
+
+!!!!!!!! URxvt
+
+URxvt.reverseVideo: true
+URxvt.font: xft:DejaVuSansMono:antialias=true:size=11:hintstyle=hintslight
+! Corrige un problème avec l'espace entre les lettres
+URxvt.letterSpace: -1
+
+URxvt.scrollBar: false
+URxvt.scrollTtyOutput: false
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress: true
+URxvt.saveLines: 16384
+
+URxvt.secondaryScreen: true
+URxvt.secondaryScroll: false
+! Option pour scroll avec la souris dans un less ou équivalent
+! Pas dans la version officielle : https://bitbucket.org/jjacky/rxvt-unicode-jjk
+URxvt.secondaryWheel: true
+
+! Colors
+! light gray
+URxvt.color8:  #7F7F7F
+! blue: lighten blue to be more readable on dark shell
+URxvt.color4:  #0000EE
+URxvt.color12: #5C5CFF
+
+URxvt.perl-ext-common:  default,resize-font
+! To avoid conflict with resize font.
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! Part of PATH's list
+URxvt.selection.pattern-0: ((?:(?:http|ftp)s?)?[^: ]+)
+! On term of piped command. FIXME: Not working for first term if it is after PS1
+URxvt.selection.pattern-1: \\|?([^|>]+)\\|?
+! Shell variable
+URxvt.selection.pattern-2: \\$([a-zA-Z_][a-zA-Z0-9_]*)
+! Get the whole line without the PS1
+URxvt.selection.pattern-3: ^[a-z]+@[[:alnum:]]+:(?:[[:space:]0-9]+:)?[[:word:]~/() .]+[$#] (.+)
+! git patch file name
+URxvt.selection.pattern-4: ^(?:--- a/|\\+\\+\\+ b/)(.*)$
+! Equality selection
+!URxvt.selection.pattern-4: (?:^|[[:space:]])([^=[:space:]]+)=[^=[:space:]]*
+! Part of path
+!URxvt.selection.pattern-5: /?([^:/ ]+)/?
