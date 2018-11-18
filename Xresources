@@ -22,7 +22,8 @@ URxvt.font: xft:DejaVuSansMono:antialias=true:size=11:hintstyle=hintslight
 ! Corrige un problème avec l'espace entre les lettres
 URxvt.letterSpace: -1
 
-URxvt.scrollBar: false
+URxvt.scrollBar: true
+URxvt.scrollstyle: plain
 URxvt.scrollTtyOutput: false
 URxvt.scrollWithBuffer: true
 URxvt.scrollTtyKeypress: true
