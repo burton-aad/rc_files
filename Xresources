@@ -48,7 +48,7 @@ URxvt.iso14755: false
 URxvt.iso14755_52: false
 
 ! Part of PATH's list
-URxvt.selection.pattern-0: ((?:(?:http|ftp)s?)?[^: ]+)
+URxvt.selection.pattern-0: ((?:(?:http|ftp)s?://)?[^: ]+)
 ! On term of piped command. FIXME: Not working for first term if it is after PS1
 URxvt.selection.pattern-1: \\|?([^|>]+)\\|?
 ! Shell variable
