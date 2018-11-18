@@ -2,7 +2,7 @@
 
 ## Install packages
 
-PKGS="git curl vim tofrodos"
+PKGS="git curl vim tofrodos rxvt-unicode-256color"
 
 if dpkg -l | grep -q xserver; then
     # grapical display
@@ -36,3 +36,11 @@ else
     git clone --recurse-submodules https://github.com/burton-aad/.emacs.d.git
     popd
 fi
+
+## URxvt
+# get extensions
+mkdir -p ~/.urxvt/ext
+pushd ~/.urxvt/ext > /dev/null
+curl --remote-name-all https://raw.githubusercontent.com/pkkolos/urxvt-scripts/master/vtwheel \
+                       https://raw.githubusercontent.com/burton-aad/urxvt-softclear/master/soft-clear
+popd > /dev/null

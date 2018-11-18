@@ -42,8 +42,9 @@ URxvt.color8:  #7F7F7F
 URxvt.color4:  #0000EE
 URxvt.color12: #5C5CFF
 
-URxvt.perl-ext-common:  default,resize-font
-! To avoid conflict with resize font.
+URxvt.perl-ext-common:  default,font-size,vtwheel,soft-clear
+
+! To avoid conflict with font resize extension.
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 
