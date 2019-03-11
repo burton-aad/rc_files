@@ -14,15 +14,21 @@ fi
 
 sudo apt install -y $PKGS
 
+function install_link {
+    local DEST=$1
+    shift
+    for f in $@; do
+        if [ -e $DEST/.$f ]; then
+            [ -L $DEST/.$f ] && rm -f $DEST/.$f || mv -f $DEST/.$f $DEST/.$f.orig
+        fi
+        ln -sv $(dirname $(readlink -f $0))/$f $DEST/.$f
+    done;
+}
+
 ## Install rc files from this directory to the current user
-
 RC_FILES="bashrc bash_aliases gitconfig Xresources"
-
-for f in $RC_FILES; do
-    [ -f ~/.$f ] && mv -f ~/.$f ~/.$f.orig
-    [ -L ~/.$f ] && rm -f ~/.$f
-    ln -s $(dirname $(readlink -f $0))/$f ~/.$f
-done;
+CONFIG_FILES="$(ls -d config/*)"
+install_link $HOME $RC_FILES $CONFIG_FILES
 
 ## Emacs config
 if test -e ~/.emacs.d && test ! -d ~/.emacs.d; then

@@ -1,0 +1,41 @@
+#! /bin/sh
+
+WIDTH=${WIDTH:-240}
+HEIGHT=${HEIGHT:-150}
+DATEFMT=${DATEFMT:-"+%a %d.%m.%Y %H:%M"}
+SHORTFMT=${SHORTFMT:-"+%H:%M:%S"}
+
+OPTIND=1
+while getopts ":f:W:H:" opt; do
+    case $opt in
+        f) DATEFMT="$OPTARG" ;;
+        W) WIDTH="$OPTARG" ;;
+        H) HEIGHT="$OPTARG" ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+        :)
+            echo "Option -$OPTARG requires an argument." >&2
+            exit 1
+            ;;
+    esac
+done
+
+case "$BLOCK_BUTTON" in
+  1|2|3)
+
+	# the position of the upper left corner of the popup
+    tmp=$(python ~/.config/i3blocks/multimon_pos.py $BLOCK_X $BLOCK_Y $WIDTH $HEIGHT)
+	posX=$(echo $tmp | cut -d" " -f1)
+	posY=$(echo $tmp | cut -d" " -f2)
+
+	i3-msg -q "exec yad --calendar \
+        --width=$WIDTH --height=$HEIGHT \
+	    --undecorated --fixed \
+	    --close-on-unfocus --no-buttons \
+	    --posx=$posX --posy=$posY \
+	    > /dev/null"
+esac
+echo "$(date "$DATEFMT")"
+echo "$(date "$SHORTFMT")"

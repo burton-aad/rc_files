@@ -1,0 +1,74 @@
+#!/bin/sh
+# Copyright (C) 2014 Julien Bonjean <julien@bonjean.info>
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+TYPE="${BLOCK_INSTANCE:-mem}"
+
+MEM_COLOR=${MEM_COLOR:-"#00FF00"}
+MEM_COLOR_HIGH=${MEM_COLOR_HIGH:-"#FF0000"}
+MEM_COLOR_CACHED=${MEM_COLOR_CACHED:-"#BBBB00"}
+
+MEM_HIGH_THRESHOLD=${MEM_HIGH_THRESHOLD:-90}
+
+awk -v type=$TYPE '
+type!="swap" && /^MemTotal:/ {
+	mem_total=$2
+}
+type!="swap" && /^MemAvailable:/ {
+	mem_free=$2
+}
+type!="swap" && /^Cached:/ {
+	mem_cached=$2
+}
+type=="swap" && /^SwapTotal:/ {
+	mem_total=$2
+}
+type=="swap" && /^SwapFree:/ {
+	mem_free=$2
+}
+
+END {
+	SIZE=20
+	count=0
+	mem_used = mem_total-mem_free
+	mem_used_percent = mem_used*100/mem_total
+    mem_cached_percent = mem_cached*100/mem_total
+
+	# full text
+    if (mem_used_percent > '$MEM_HIGH_THRESHOLD')
+		printf("<span color=\"'$MEM_COLOR_HIGH'\">")
+	else
+		printf("<span color=\"'$MEM_COLOR'\">")
+	for (i=0; i<mem_used_percent; i+=100/SIZE) {
+		printf("|")
+		count++
+	}
+	printf("</span>")
+
+	printf("<span color=\"'$MEM_COLOR_CACHED'\">")
+	for (i=0; i<mem_cached_percent; i+=100/SIZE) {
+		printf("|")
+		count++
+	}
+	printf("</span>")
+
+	printf("<span color=\"#555555\">")
+	for (i=count; i<SIZE; i++)
+		printf("-")
+	printf("</span>")
+	# printf("%.1fG\n", mem_free/1024/1024)
+}
+
+' /proc/meminfo
