@@ -157,3 +157,7 @@ fi
 [ -d ~/bin ] && PATH="~/bin:${PATH}"
 
 source $LOCAL_PWD/acd_func.sh
+
+if [ -f ~/.bash_local ]; then
+    . ~/.bash_local
+fi
