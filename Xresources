@@ -23,6 +23,7 @@ URxvt.font: xft:DejaVuSansMono:antialias=true:size=11:hintstyle=hintslight
 URxvt.letterSpace: -1
 
 URxvt.scrollBar: true
+URxvt.scrollBar_right: true
 URxvt.scrollstyle: plain
 URxvt.scrollTtyOutput: false
 URxvt.scrollWithBuffer: true
