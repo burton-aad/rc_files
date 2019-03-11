@@ -14,6 +14,9 @@ fi
 
 sudo apt install -y $PKGS
 
+# One cannot source this file
+RC_FOLDER=$(dirname $(readlink -f $0))
+
 function install_link {
     local DEST=$1
     shift
@@ -21,7 +24,7 @@ function install_link {
         if [ -e $DEST/.$f ]; then
             [ -L $DEST/.$f ] && rm -f $DEST/.$f || mv -f $DEST/.$f $DEST/.$f.orig
         fi
-        ln -sv $(dirname $(readlink -f $0))/$f $DEST/.$f
+        ln -sv $RC_FOLDER/$f $DEST/.$f
     done;
 }
 
@@ -34,6 +37,7 @@ install_link $HOME $RC_FILES $CONFIG_FILES
 if test -e ~/.emacs.d && test ! -d ~/.emacs.d; then
     rm -f ~/.emacs.d
 fi
+[ -e ~/.emacs ] && mv ~/.emacs ~/.emacs.orig
 
 if [ -d ~/.emacs.d ]; then
     echo "~/.emacs.d already exists, keep it."
