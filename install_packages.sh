@@ -2,7 +2,7 @@
 
 ## Install packages
 
-PKGS="git curl vim tofrodos rxvt-unicode-256color"
+PKGS="git curl vim tofrodos rxvt-unicode-256color libterm-readkey-perl"
 
 if dpkg -l | grep -q xserver; then
     # grapical display

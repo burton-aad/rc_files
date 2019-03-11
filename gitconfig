@@ -2,9 +2,11 @@
 	email = TO_SET
 	name = TO_SET
 [color]
-	ui = true
+	ui = auto
 [log]
 	decorate = short
+[grep]
+	lineNumber=true
 [push]
 	default = upstream
 [interactive]
