@@ -42,8 +42,9 @@ separator=false
 separator_block_width=5
 
 [disk]
-#label=HOME
+# label=HOME
 label=
+# label=🏠
 #instance=/mnt/data
 interval=30
 
@@ -68,6 +69,7 @@ separator_block_width=5
 command=/usr/share/i3blocks/iface
 #instance=wlan0
 label=
+# label=🖧
 color=#00FF00
 interval=10
 separator=false
@@ -126,7 +128,8 @@ markup=pango
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [cpu_usage]
-label=CPU
+# label=CPU
+label=💻
 interval=3
 # min_width=CPU: 100.00%
 #separator=false
@@ -152,7 +155,8 @@ interval=30
 
 [calendar]
 interval=1
-label=
+# label=
+label=📆
 # DATEFMT=+%a %d %b %H:%M
 # SHORTFMT=+%H:%M:%S
 # HEIGHT=180
