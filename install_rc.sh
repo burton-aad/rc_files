@@ -29,7 +29,7 @@ if [ -d ~/.emacs.d ]; then
     echo "~/.emacs.d already exists, keep it."
 else
     pushd ~/
-    git clone --recurse-submodules https://github.com/burton-aad/.emacs.d.git
+    git clone --recurse-submodules https://github.com/burton-aad/emacs.d.git
     popd
 fi
 
