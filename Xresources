@@ -32,9 +32,6 @@ URxvt.saveLines: 16384
 
 URxvt.secondaryScreen: true
 URxvt.secondaryScroll: false
-! Option pour scroll avec la souris dans un less ou équivalent
-! Pas dans la version officielle : https://bitbucket.org/jjacky/rxvt-unicode-jjk
-URxvt.secondaryWheel: true
 
 ! Colors
 ! light gray
