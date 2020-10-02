@@ -5,18 +5,24 @@
 	ui = auto
 [log]
 	decorate = short
+	date = format:%d %5b %Y %H:%M:%S
 [grep]
-	lineNumber=true
+	lineNumber = true
 [push]
 	default = upstream
 [interactive]
 	singlekey = true
 [pretty]
-	line = format:%C(auto)%h %Cgreen%<(17)%aN%C(auto)%d %Creset%s
-	linedate = format:%C(auto)%h %Cblue%>(30)%ad %Cgreen%<(17)%aN%C(auto)%d %Creset%s
+	# Format oneline avec l'auteur du commit.
+	line = format:%C(auto)%h %Cgreen%<(20)%aN%C(auto)%d %Creset%s
+	linedate = format:%C(auto)%h %Cblue%>(22)%ad %Cgreen%<(20)%aN%C(auto)%d %Creset%s
 [alias]
 	lg = log --graph --pretty=line
 	lgdate = log --graph --pretty=linedate
 	st = status
 	co = checkout
 	ci = commit
+	# Add sans whitespace.
+	addnw = !sh -c 'git diff -U0 -w "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
+	# Le dernier commit de chaque branche dans l'ordre de date de commit (le plus récent en premier)
+	lsbr = for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(align:30)%(refname:short)%(end)%(color:reset) %(color:red)%(objectname:short)%(color:reset) %(contents:subject) %(color:green)%(authorname)%(color:reset) (%(color:blue)%(committerdate:relative)%(color:reset))'
