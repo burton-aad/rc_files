@@ -162,6 +162,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+[ -d ~/.local/bin ] && PATH="~/.local/bin:${PATH}"
 [ -d ~/bin ] && PATH="~/bin:${PATH}"
 
 source $LOCAL_PWD/acd_func.sh
