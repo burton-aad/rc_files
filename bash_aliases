@@ -34,3 +34,15 @@ if [ -z "$HISTSIZE" ]; then
   gdb() { HISTSIZE=70000000; /usr/bin/gdb "$@"; }
   export -f gdb
 fi
+
+# fhe - repeat history edit
+writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
+fhe() {
+  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac --bind ctrl-p:toggle-preview --preview="echo {}" --preview-window=up:3:wrap:hidden --no-hscroll -e | sed -re 's/^\s*[0-9]+\s*//' | writecmd
+}
+
+export FZF_DEFAULT_OPTS='--height 40% --border --layout=reverse --inline-info -m'
+
+# Check space at begin of line. Use C-u C-r to not overwrite default C-r.
+builtin bind -x '"\C-x1": "fhe"';
+builtin bind '"\C-u\C-r": "\C-x1\e^\er"'
