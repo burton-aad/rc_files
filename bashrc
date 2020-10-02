@@ -23,10 +23,18 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000000
-HISTFILESIZE=20000000
-
-
+# Unlimited bash history
+if [[ ${BASH_VERSINFO[0]} -gt 4 || ( ${BASH_VERSINFO[0]} -eq 4 && ${BASH_VERSINFO[1]} -ge 3 ) ]]; then
+  # New in bash 4.3
+  export HISTSIZE=-1
+  export HISTFILESIZE=-1
+else
+  # Undocumented feature
+  export HISTSIZE=
+  export HISTFILESIZE=
+fi
+# Change file location to avoid issue with some bash session without rc load
+export HISTFILE=~/.bash_shared_history
 
 
 ############# Shell options
