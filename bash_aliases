@@ -27,3 +27,10 @@ alias e="emacs -nw"
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+if [ -z "$HISTSIZE" ]; then
+  # In case of no HISTSIZE, set it in gdb to get history.
+  #alias gdb="HISTSIZE=1000000 gdb"
+  gdb() { HISTSIZE=70000000; /usr/bin/gdb "$@"; }
+  export -f gdb
+fi
