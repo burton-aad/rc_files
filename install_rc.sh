@@ -15,7 +15,7 @@ function install_link {
 }
 
 ## Install rc files from this directory to the current user
-RC_FILES="bashrc bash_aliases gitconfig Xresources"
+RC_FILES="bashrc bash_aliases gitconfig Xresources tmux.conf"
 CONFIG_FILES="$(ls -d config/*)"
 install_link $HOME $RC_FILES $CONFIG_FILES
 
