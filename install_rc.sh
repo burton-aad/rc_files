@@ -14,12 +14,12 @@ function install_link {
     done;
 }
 
-## Install rc files from this directory to the current user
-RC_FILES="bashrc bash_aliases gitconfig Xresources tmux.conf"
-CONFIG_FILES="$(ls -d config/*)"
-install_link $HOME $RC_FILES $CONFIG_FILES
 
 ## Emacs config
+# clone configs
+[ -d config/emacs.d ] || git clone --recurse-submodules https://github.com/burton-aad/emacs.d.git config/emacs.d
+
+# Move old emacs configs
 if test -e ~/.emacs.d && test ! -d ~/.emacs.d; then
     rm -f ~/.emacs.d
 fi
@@ -28,10 +28,15 @@ fi
 if [ -d ~/.emacs.d ]; then
     echo "~/.emacs.d already exists, keep it."
 else
-    pushd ~/
-    git clone --recurse-submodules https://github.com/burton-aad/emacs.d.git
-    popd
+    git clone https://github.com/plexus/chemacs2.git ~/.emacs.d
 fi
+
+
+## Install rc files from this directory to the current user
+RC_FILES="bashrc bash_aliases gitconfig Xresources tmux.conf"
+CONFIG_FILES="$(ls -d config/*)"
+install_link $HOME $RC_FILES $CONFIG_FILES
+
 
 ## URxvt
 # get extensions
