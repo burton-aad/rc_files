@@ -18,6 +18,13 @@ function install_link {
 ## Emacs config
 # clone configs
 [ -d config/emacs.d ] || git clone --recurse-submodules https://github.com/burton-aad/emacs.d.git config/emacs.d
+if [ ! -d config/doom-emacs ]; then
+  git clone --depth 1 https://github.com/hlissner/doom-emacs config/doom-emacs
+  ./config/doom-emacs/bin/doom install
+fi
+if [ ! -d config/spacemacs ]; then
+  git clone https://github.com/syl20bnr/spacemacs config/spacemacs
+fi
 
 # Move old emacs configs
 if test -e ~/.emacs.d && test ! -d ~/.emacs.d; then
