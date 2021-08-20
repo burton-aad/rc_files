@@ -28,20 +28,25 @@ alias e="emacs -nw"
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+
+# In case of no HISTSIZE, set it in gdb to get history.
 if [ -z "$HISTSIZE" ]; then
-  # In case of no HISTSIZE, set it in gdb to get history.
   #alias gdb="HISTSIZE=1000000 gdb"
   gdb() { HISTSIZE=70000000; /usr/bin/gdb "$@"; }
   export -f gdb
 fi
 
-# fhe - repeat history edit
+# Use fzf to search through history
 writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
 fhe() {
-  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac --bind ctrl-p:toggle-preview --preview="echo {}" --preview-window=up:3:wrap:hidden --no-hscroll -e | sed -re 's/^\s*[0-9]+\s*//' | writecmd
+  # fhe - repeat history edit
+  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) \
+    | fzf +s --tac --bind ctrl-p:toggle-preview --preview="echo {}" \
+          --preview-window=up:3:wrap:hidden --no-hscroll --exact \
+    | sed -re 's/^\s*[0-9]+\s*//' | writecmd
 }
 
-export FZF_DEFAULT_OPTS='--height 40% --border --layout=reverse --inline-info -m'
+export FZF_DEFAULT_OPTS='--height 40% --border --layout=reverse --inline-info --multi'
 
 # Check space at begin of line. Use C-u C-r to not overwrite default C-r.
 builtin bind -x '"\C-x1": "fhe"';
