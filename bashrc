@@ -9,8 +9,13 @@ case $- in
   *) return;;
 esac
 
-LOCAL_PWD=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
+# Emacs run dumb terminal with tramp. Simplify init for tramp
+[ $TERM == "dumb" ] && PS1="$ " && return
 
+# Special case for specific case
+[ $TERM == "rxvt-unicode-256color" ] && export TERM=rxvt-256color
+
+LOCAL_PWD=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
 
 
 ############# HISTORY
@@ -146,7 +151,6 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -167,6 +171,7 @@ fi
 
 source $LOCAL_PWD/acd_func.sh
 
+# Local bashrc
 if [ -f ~/.bash_local ]; then
     . ~/.bash_local
 fi
