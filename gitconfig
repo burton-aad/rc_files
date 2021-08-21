@@ -10,6 +10,8 @@
 	lineNumber = true
 [push]
 	default = upstream
+[pull]
+	rebase = false
 [interactive]
 	singlekey = true
 [pretty]
