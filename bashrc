@@ -60,11 +60,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
   debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-  xterm-color|*-256color) color_prompt=yes;;
-esac
-
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
@@ -75,7 +70,7 @@ if [ -n "$force_color_prompt" ]; then
     # We have color support; assume it's compliant with Ecma-48
     # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
     # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
+
     # see man 4 console_codes
     # \[ and \] are used in bash prompt (see man bash PROMPTING) to start and
     # end a sequence character so size of prompt is correctly computed.
@@ -97,7 +92,6 @@ if [ -n "$force_color_prompt" ]; then
     export COLOR_WHITE="\[\033[1;37m\]"
     export COLOR_NEUTRAL="\[\033[0m\]"
   else
-    color_prompt=
     export COLOR_BLACK=""
     export COLOR_DARKGRAY=""
     export COLOR_RED=""
@@ -118,22 +112,21 @@ if [ -n "$force_color_prompt" ]; then
   fi
 fi
 
+PS1_NEWLINE=""
+[ $HOSTNAME == "antix1" ] && PS1_NEWLINE="\n"
+
 function fancy_prompt {
   return_code=$?
   return_code=$(printf "%3d" $return_code)
   if [ $return_code == 0 ]; then ret_color=$COLOR_LIGHT_BLUE; else ret_color=$COLOR_LIGHT_RED; fi
   gps1=$(__git_ps1 2> /dev/null)
-  if [ $HOSTNAME == "antix1" ]; then newline="\n"; else newline=""; fi
+  if [ "$VIRTUAL_ENV" ]; then VENV="($(basename $VIRTUAL_ENV)) "; else VENV=""; fi
   # Set your own prompt with color
-  PS1="${debian_chroot:+($debian_chroot)}$COLOR_LIGHT_RED\u$COLOR_NEUTRAL@$COLOR_YELLOW\h:$ret_color$return_code$COLOR_LIGHT_GREEN:\w$COLOR_NEUTRAL$gps1$newline$COLOR_LIGHT_GREEN\$$COLOR_NEUTRAL "
+  PS1="$VENV${debian_chroot:+($debian_chroot)}$COLOR_LIGHT_RED\u$COLOR_NEUTRAL@$COLOR_YELLOW\h:$ret_color$return_code$COLOR_LIGHT_GREEN:\w$COLOR_NEUTRAL$gps1$PS1_NEWLINE$COLOR_LIGHT_GREEN\$$COLOR_NEUTRAL "
 }
 
-if [ "$color_prompt" = yes ]; then
-  PROMPT_COMMAND="fancy_prompt"
-else
-  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
+PROMPT_COMMAND="fancy_prompt"
+unset force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
