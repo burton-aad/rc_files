@@ -23,6 +23,8 @@ alias du='du -h'
 alias diff="diff -u"
 
 alias e="emacs -nw"
+alias doomemacs="emacs --with-profile doom"
+alias spacemacs="emacs --with-profile spacemacs"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
