@@ -14,13 +14,18 @@ function install_link {
     done;
 }
 
+# Install rc files
+RC_FILES="bashrc bash_aliases gitconfig Xresources tmux.conf doom.d"
+install_link $HOME $RC_FILES
+
 
 ## Emacs config
 # clone configs
 [ -d config/emacs.d ] || git clone --recurse-submodules https://github.com/burton-aad/emacs.d.git config/emacs.d
 if [ ! -d config/doom-emacs ]; then
   git clone --depth 1 https://github.com/hlissner/doom-emacs config/doom-emacs
-  ./config/doom-emacs/bin/doom install
+  # ./config/doom-emacs/bin/doom install
+  ./config/doom-emacs/bin/doom sync
 fi
 if [ ! -d config/spacemacs ]; then
   git clone https://github.com/syl20bnr/spacemacs config/spacemacs
@@ -39,10 +44,9 @@ else
 fi
 
 
-## Install rc files from this directory to the current user
-RC_FILES="bashrc bash_aliases gitconfig Xresources tmux.conf"
+## Install config files after filling it with all repos
 CONFIG_FILES="$(ls -d config/*)"
-install_link $HOME $RC_FILES $CONFIG_FILES
+install_link $HOME $CONFIG_FILES
 
 
 ## URxvt
