@@ -113,7 +113,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 PS1_NEWLINE=""
-[ $HOSTNAME == "antix1" ] && PS1_NEWLINE="\n"
+[[ $HOSTNAME == "antix1" || $TERM =~ "eterm" ]] && PS1_NEWLINE="\n"
 
 function fancy_prompt {
   return_code=$?
