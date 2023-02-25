@@ -56,3 +56,10 @@ pushd ~/.urxvt/ext > /dev/null
 curl --remote-name-all https://raw.githubusercontent.com/pkkolos/urxvt-scripts/master/vtwheel \
                        https://raw.githubusercontent.com/burton-aad/urxvt-softclear/master/soft-clear
 popd > /dev/null
+
+
+## Kitty
+# get extensions
+pushd $RC_FOLDER/config/kitty > /dev/null
+curl --remote-name-all https://raw.githubusercontent.com/yurikhan/kitty-smart-scroll/master/smart_scroll.py
+popd > /dev/null
