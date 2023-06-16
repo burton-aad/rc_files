@@ -53,3 +53,6 @@ export FZF_DEFAULT_OPTS='--height 40% --border --layout=reverse --inline-info --
 # Check space at begin of line. Use C-u C-r to not overwrite default C-r.
 builtin bind -x '"\C-x1": "fhe"';
 builtin bind '"\C-u\C-r": "\C-x1\e^\er"'
+
+# Special cd function
+source $LOCAL_PWD/acd_func.sh
