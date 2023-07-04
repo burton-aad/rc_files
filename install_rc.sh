@@ -10,12 +10,13 @@ function install_link {
         if [ -e $DEST/.$f ]; then
             [ -L $DEST/.$f ] && rm -f $DEST/.$f || mv -f $DEST/.$f $DEST/.$f.orig
         fi
+        mkdir -p $(dirname $DEST/.$f)
         ln -sv $RC_FOLDER/$f $DEST/.$f
     done;
 }
 
 # Install rc files
-RC_FILES="bashrc bash_aliases gitconfig Xresources tmux.conf doom.d vimrc"
+RC_FILES="bashrc $(ls bashrc.d/*) gitconfig Xresources tmux.conf doom.d vimrc"
 install_link $HOME $RC_FILES
 
 ## Install config files after filling it with all repos

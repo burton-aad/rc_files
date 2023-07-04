@@ -1,5 +1,10 @@
 #! /bin/bash
 
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -29,30 +34,3 @@ alias spacemacs="emacs --with-profile spacemacs"
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-
-# In case of no HISTSIZE, set it in gdb to get history.
-if [ -z "$HISTSIZE" ]; then
-  #alias gdb="HISTSIZE=1000000 gdb"
-  gdb() { HISTSIZE=70000000; /usr/bin/gdb "$@"; }
-  export -f gdb
-fi
-
-# Use fzf to search through history
-writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
-fhe() {
-  # fhe - repeat history edit
-  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) \
-    | fzf +s --tac --bind ctrl-p:toggle-preview --preview="echo {}" \
-          --preview-window=up:3:wrap:hidden --no-hscroll --exact \
-    | sed -re 's/^\s*[0-9]+\s*//' | writecmd
-}
-
-export FZF_DEFAULT_OPTS='--height 40% --border --layout=reverse --inline-info --multi'
-
-# Check space at begin of line. Use C-u C-r to not overwrite default C-r.
-builtin bind -x '"\C-x1": "fhe"';
-builtin bind '"\C-u\C-r": "\C-x1\e^\er"'
-
-# Special cd function
-source $LOCAL_PWD/acd_func.sh
