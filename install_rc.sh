@@ -60,6 +60,6 @@ popd > /dev/null
 
 ## Kitty
 # get extensions
-# pushd $RC_FOLDER/config/kitty > /dev/null
-# curl --remote-name-all
-# popd > /dev/null
+pushd $RC_FOLDER/config/kitty > /dev/null
+curl --remote-name-all https://raw.githubusercontent.com/burton-aad/kitty-xmap/master/xmap.py
+popd > /dev/null
