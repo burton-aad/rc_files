@@ -9,7 +9,7 @@
 [grep]
 	lineNumber = true
 [push]
-	default = upstream
+	default = current
 [pull]
 	rebase = false
 [interactive]
