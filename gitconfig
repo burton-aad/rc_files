@@ -8,6 +8,8 @@
 	date = format:%d %5b %Y %H:%M:%S
 [grep]
 	lineNumber = true
+[init]
+	defaultBranch = master
 [push]
 	default = current
 [pull]
