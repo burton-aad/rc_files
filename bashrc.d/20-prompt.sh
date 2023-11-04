@@ -27,11 +27,20 @@ function fancy_prompt {
 }
 
 PROMPT_COMMAND="fancy_prompt"
+REF_USER=""
+REF_HOST=""
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
   xterm*|rxvt*)
-    PROMPT_COMMAND="$PROMPT_COMMAND;echo -ne \"\033]0;\${debian_chroot:+(\$debian_chroot)}\${USER}@\${HOSTNAME}: \${PWD/\$HOME/\~}\007\""
+    PROMPT_COMMAND+=";echo -ne \"\033]0;"
+    PROMPT_COMMAND+="\${debian_chroot:+(\$debian_chroot)}"
+    if [ $USER = "$REF_USER" ]; then
+      [ $HOSTNAME != "$REF_HOST" ] && PROMPT_COMMAND+="\${HOSTNAME}: "
+    else
+      PROMPT_COMMAND+="\${USER}@\${HOSTNAME}: "
+    fi
+    PROMPT_COMMAND+="\${PWD/\$HOME/\~}\007\""
     ;;
   *)
     ;;
