@@ -3,6 +3,10 @@
 # One cannot source this file
 RC_FOLDER=$(dirname $(readlink -f $0))
 
+function perr {
+  echo -e "\033[1;91m[ERR] $@\033[0m"
+}
+
 function install_link {
     local DEST=$1
     shift
@@ -43,7 +47,7 @@ fi
 [ -e ~/.emacs ] && mv ~/.emacs ~/.emacs.orig
 
 if [ -d ~/.emacs.d ]; then
-    echo "~/.emacs.d already exists, keep it."
+    perr "~/.emacs.d already exists, keep it."
 else
     git clone https://github.com/plexus/chemacs2.git ~/.emacs.d
 fi
