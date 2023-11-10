@@ -1,1 +1,5 @@
 *~
+config/emacs.d
+config/doom-emacs
+config/spacemacs
+config/kitty/xmap.py
