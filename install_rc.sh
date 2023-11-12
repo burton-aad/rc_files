@@ -23,10 +23,6 @@ function install_link {
 RC_FILES="bashrc $(ls bashrc.d/*) gitconfig Xresources tmux.conf doom.d vimrc"
 install_link $HOME $RC_FILES
 
-## Install config files after filling it with all repos
-CONFIG_FILES="$(ls -d config/*)"
-install_link $HOME $CONFIG_FILES
-
 
 ## Emacs config
 # clone configs
@@ -51,6 +47,11 @@ if [ -d ~/.emacs.d ]; then
 else
     git clone https://github.com/plexus/chemacs2.git ~/.emacs.d
 fi
+
+
+## Install config files after filling it with all repos
+CONFIG_FILES="$(ls -d config/*)"
+install_link $HOME $CONFIG_FILES
 
 
 ## URxvt
