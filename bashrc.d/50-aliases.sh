@@ -29,6 +29,8 @@ alias du='du -h'
 
 alias diff="diff -u"
 
+[[ $TERM =~ "rxvt" ]] && alias reset="echo -ne '\033c'"
+
 alias e="emacs -nw"
 alias doomemacs="emacs --with-profile doom"
 alias spacemacs="emacs --with-profile spacemacs"

@@ -12,9 +12,6 @@ esac
 # Emacs run dumb terminal with tramp. Simplify init for tramp
 [ $TERM == "dumb" ] && PS1="$ " && return
 
-# Special case for specific case
-[ $TERM == "rxvt-unicode-256color" ] && export TERM=rxvt-256color
-
 # Source all files in the ~/.bashrc.d directory
 BASHRC_DIR=$HOME/.bashrc.d
 for f in $(ls $BASHRC_DIR); do

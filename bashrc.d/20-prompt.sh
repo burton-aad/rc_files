@@ -22,7 +22,7 @@ function fancy_prompt {
   PS1+="$COLOR_YELLOW\h:"                   # hostname
   PS1+="$ret_color$return_code"             # return code from last command
   PS1+="$COLOR_LIGHT_GREEN:\w"              # working diretcory
-  [ $gps1 ] && PS1+="$COLOR_NEUTRAL$gps1"   # git branch
+  [ "$gps1" ] && PS1+="$COLOR_NEUTRAL$gps1"   # git branch
   PS1+="$PS1_NEWLINE$COLOR_LIGHT_GREEN\$$COLOR_NEUTRAL " # end of prompt
 }
 
