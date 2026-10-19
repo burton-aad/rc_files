@@ -45,3 +45,6 @@ case "$TERM" in
   *)
     ;;
 esac
+
+# Uncomment to save history in real time
+# PROMPT_COMMAND="$PROMPT_COMMAND; builtin history -a; builtin history -c; builtin history -r"
